@@ -1,0 +1,101 @@
+# If the Oracle DataAccess file doesn't exist, copy from share
+function Get-DataAccessFile
+{
+    $file = 'C:\Windows\Microsoft.NET\assembly\GAC_64\'
+    if (!(Test-Path '$file\Oracle.DataAccess'))
+    {
+        copy-item -Path '\\opnasi02\server\Documents\PND\ECD\Oracle.DataAccess' -Destination $file -Force -Recurse
+    }
+    else
+    {
+        Write-Host 'Oracle.DataAccess file exists already...'
+    }
+}
+
+
+function Get-Oracle
+{
+    param(
+        [string]$Version
+    )
+
+}
+# Install Oracle 19c
+function Install-Oracle
+{
+    param(
+        
+        [string]$Version
+    )
+    $askversion = Read-Host -Prompt "Install Oracle 19 or 12? (19/12)"
+    if ($askversion -eq '19')
+    {
+        if (!(Test-Path "C:\oracle_64\product\19.0.0\client_1\bin"))
+        {
+            Write-Host -BackgroundColor White -ForegroundColor Black "Installing Oracle 19c..."
+            Copy-Item "\\opnasi01\Software\Server\Downloaded Software\Oracle\Oracle19\ODAC1931_x64" "C:\" -Force -Recurse -ErrorAction SilentlyContinue | out-null
+            Start-Process -FilePath "C:\ODAC1931_x64\setup.exe" -Wait;
+            Get-DataAccessFile
+        }
+        else
+        {
+            Write-Host -ForegroundColor Black -BackgroundColor Green "Oracle 19C already installed..."
+        }    
+    }
+    elseif ($askversion -eq '12')
+    {
+        if (!(Test-Path "C:\oracle_64\product\12.1.0\client_1\bin"))
+        {
+            Write-Host -BackgroundColor White -ForegroundColor Black "Installing Oracle 19c..."
+            Copy-Item "\\opnasi01\software\server\Downloaded Software\Oracle\Oracle12c\winx64_12102_clientb\client" "C:\upgf" -Force -Recurse -ErrorAction SilentlyContinue | out-null
+            Start-Process -FilePath "C:\upgf\client\setup.exe" -Wait;
+        }
+        else
+        {
+            Write-Host -ForegroundColor Black -BackgroundColor Green "Oracle 12C already installed..."
+        } 
+    }
+        else
+    {
+        Write-Host -ForegroundColor Black -BackgroundColor Green "Not installing Oracle 19c..."
+    }
+}
+
+
+# Tidal Install
+function Get-Tidal
+{
+    param(
+        [string]$Server
+    )
+
+    # Main copy
+    if (test-path '\\opnasi01\software\Server\Downloaded Software\Tidal -2023\Tidal-Automation-Agent-Windows-32-3.4.3.3.zip')
+    {
+        if ($Server -eq '')
+        {
+            Copy-Item '\\opnasi01\software\Server\Downloaded Software\Tidal -2023\Tidal-Automation-Agent-Windows-32-3.4.3.3.zip' 'c:\users\$env:user\desktop' | Out-Null
+            Write-Host -ForegroundColor Green -BackgroundColor Blue "Tidal App Copied";
+            Expand-Archive -Path 'C:\Users\$env:USERNAME\Desktop\Tidal-Automation-Agent-Windows-32-3.4.3.3.zip' -DestinationPath 'C:\Users\$env:USERNAME\Desktop\Tidal' | Out-Null
+        }
+        elseif ($Server -ne '')
+        {
+            Copy-Item '\\opnasi01\software\Server\Downloaded Software\Tidal -2023\Tidal-Automation-Agent-Windows-32-3.4.3.3.zip' '\\$Server\C$\users\Administrator\Desktop' | Out-Null
+            Write-Host -ForegroundColor Green -BackgroundColor Blue "Tidal app copied to Local Admin desktop on $Server"
+        }
+    }
+}
+
+
+
+
+
+
+$scriptblock = {
+    
+    $t = 'tom'
+    CMD /K set tom = $t
+
+
+}
+

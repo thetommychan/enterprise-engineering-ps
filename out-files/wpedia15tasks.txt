@@ -1,0 +1,15 @@
+
+TaskPath                                       TaskName                          State      PSComputerName
+--------                                       --------                          -----      --------------
+\EDI\                                          cass                              Disabled   wpedia15
+\EDI\                                          generic pdf                       Disabled   wpedia15
+\EDI\                                          Generic-epplus_Noparms            Disabled   wpedia15
+\EDI\                                          Generic-Noparms                   Disabled   wpedia15
+\EDI\                                          generic_custom_p001_weekly        Disabled   wpedia15
+\EDI\                                          generic_custom_p001_weekly_epplus Disabled   wpedia15
+\EDI\                                          generic_custom_p014_monthly       Disabled   wpedia15
+\EDI\                                          generic_custom_p014_monthly_eppl… Disabled   wpedia15
+\EDI\                                          generic_epplus pdf                Disabled   wpedia15
+\EDI\                                          pdfinvoice                        Disabled   wpedia15
+\EDI\                                          POM                               Ready      wpedia15
+

@@ -1,0 +1,866 @@
+
+Name           : WPT Redistributables
+Vendor         : Microsoft
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK Modern Non-Versioned Developer Tools
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft Help Viewer 1.1
+Vendor         : Microsoft Corporation
+Version        : 1.1.40219
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : MariaDB 10.3 (x64)
+Vendor         : MariaDB Corporation Ab
+Version        : 10.3.9.0
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : IIS URL Rewrite Module 2
+Vendor         : Microsoft Corporation
+Version        : 7.2.1980
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK Desktop Tools x64
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Universal General MIDI DLS Extension SDK
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft .NET Framework 4.8.1 Targeting Pack
+Vendor         : Microsoft Corporation
+Version        : 4.8.09032
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK Desktop Libs arm
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : SDK Debuggers
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : NSClient++ (x64)
+Vendor         : MySolutions NORDIC
+Version        : 0.4.2.114
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft Visual C++ 2010  x64 Redistributable - 10.0.40219
+Vendor         : Microsoft Corporation
+Version        : 10.0.40219
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK for Windows Store Apps Tools
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft Visual C++ 2022 X64 Additional Runtime - 14.34.31931
+Vendor         : Microsoft Corporation
+Version        : 14.34.31931
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Citrix Broker PowerShell Snap-In
+Vendor         : Citrix Systems, Inc.
+Version        : 7.39.25730.23545
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft Visual C++ 2010  x86 Redistributable - 10.0.40219
+Vendor         : Microsoft Corporation
+Version        : 10.0.40219
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Citrix Analytics Service PowerShell snap-in - x64
+Vendor         : Citrix Systems, Inc.
+Version        : 7.39.25730.23545
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK Desktop Headers x86
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : WinRT Intellisense PPI - en-us
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft Visual C++ 2013 x86 Minimum Runtime - 12.0.21005
+Vendor         : Microsoft Corporation
+Version        : 12.0.21005
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft Visual C++ 2013 x86 Additional Runtime - 12.0.21005
+Vendor         : Microsoft Corporation
+Version        : 12.0.21005
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Universal CRT Tools x64
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Citrix Workspace(DV)
+Vendor         : Citrix Systems, Inc.
+Version        : 22.3.4000.5
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK Desktop Libs x86
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : NetWorker Extended Client
+Vendor         : DELL EMC
+Version        : 19.4.0.1
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : MySQL Workbench 6.2 CE
+Vendor         : Oracle Corporation
+Version        : 6.2.5
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : WinRT Intellisense Desktop - en-us
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft .NET Core Host FX Resolver - 3.1.32 (x64)
+Vendor         : Microsoft Corporation
+Version        : 24.192.31915
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : WPTx64 (DesktopEditions)
+Vendor         : Microsoft
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft .NET Core Runtime - 3.1.32 (x64)
+Vendor         : Microsoft Corporation
+Version        : 24.192.31915
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : WPTx64 (OnecoreUAP)
+Vendor         : Microsoft
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Citrix Workspace Inside
+Vendor         : Citrix Systems, Inc.
+Version        : 22.3.4000.4
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft ODBC Driver 13 for SQL Server
+Vendor         : Microsoft Corporation
+Version        : 13.2.5026.0
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK DirectX x64 Remote
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows IoT Extension SDK Contracts
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows App Certification Kit Native Components
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK Desktop Tools arm64
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft .NET Core Host - 3.1.32 (x64)
+Vendor         : Microsoft Corporation
+Version        : 24.192.31915
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft Visual C++ 2012 x86 Minimum Runtime - 11.0.60610
+Vendor         : Microsoft Corporation
+Version        : 11.0.60610
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Citrix Host Service PowerShell snap-in - x64
+Vendor         : Citrix Systems, Inc.
+Version        : 7.39.25730.23545
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK Desktop Headers arm64
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : WinRT Intellisense IoT - en-us
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Citrix Workspace(USB)
+Vendor         : Citrix Systems, Inc.
+Version        : 22.3.4000.5
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Universal CRT Tools x86
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : QLogic Drivers and Management Applications
+Vendor         : QLogic Corporation
+Version        : 20.50.3.3
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Citrix Monitor Service PowerShell snap-in - x64
+Vendor         : Citrix Systems, Inc.
+Version        : 7.39.25730.23545
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Online Plug-in
+Vendor         : Citrix Systems, Inc.
+Version        : 22.3.4000.5
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : SDK ARM Additions
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK Desktop Tools x86
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft Visual C++ 2022 X86 Minimum Runtime - 14.30.30704
+Vendor         : Microsoft Corporation
+Version        : 14.30.30704
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : WinRT Intellisense PPI - Other Languages
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft Web Platform Installer 5.0
+Vendor         : Microsoft Corporation
+Version        : 5.0.50430.0
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : WinRT Intellisense Desktop - Other Languages
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : MySQL Connector Net 8.0.21
+Vendor         : Oracle
+Version        : 8.0.21
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft Visual C++ 2013 x64 Additional Runtime - 12.0.21005
+Vendor         : Microsoft Corporation
+Version        : 12.0.21005
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Symantec Endpoint Protection
+Vendor         : Broadcom
+Version        : 14.3.558.0000
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Citrix Machine Creation Service PowerShell snap-in - x64
+Vendor         : Citrix Systems, Inc.
+Version        : 7.39.25730.23545
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows App Certification Kit SupportedApiList x86
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : CrowdStrike Firmware Analysis
+Vendor         : CrowdStrike, Inc.
+Version        : 6.32.14651.0
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft Visual C++ 2022 X86 Additional Runtime - 14.30.30704
+Vendor         : Microsoft Corporation
+Version        : 14.30.30704
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft Visual C++ 2008 Redistributable - x64 9.0.30729.6161
+Vendor         : Microsoft Corporation
+Version        : 9.0.30729.6161
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Citrix Delegated Administration Service PowerShell snap-in - x64
+Vendor         : Citrix Systems, Inc.
+Version        : 7.39.25730.23545
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows App Certification Kit x64
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Citrix Web Helper
+Vendor         : Citrix Systems, Inc.
+Version        : 22.3.4000.6
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729.6161
+Vendor         : Microsoft Corporation
+Version        : 9.0.30729.6161
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft Visual C++ 2013 x64 Minimum Runtime - 12.0.21005
+Vendor         : Microsoft Corporation
+Version        : 12.0.21005
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Citrix XenCenter
+Vendor         : Citrix Systems, Inc.
+Version        : 6.2.2
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK for Windows Store Apps Libs
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK for Windows Store Apps Metadata
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK Modern Versioned Developer Tools
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Citrix AD Identity Service PowerShell snap-in - x64
+Vendor         : Citrix Systems, Inc.
+Version        : 7.39.25730.23545
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Citrix PoSH SDK Proxy PowerShell Snap-In
+Vendor         : Citrix Systems, Inc.
+Version        : 7.39.25730.23545
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK EULA
+Vendor         : Microsoft Corporations
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK Facade Windows WinMD Versioned
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Qualys Cloud Security Agent
+Vendor         : Qualys, Inc.
+Version        : 5.3.0.15
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : CrowdStrike Sensor Platform
+Vendor         : CrowdStrike, Inc.
+Version        : 6.52.16606.0
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows Desktop Extension SDK
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft Visual C++ 2012 x86 Additional Runtime - 11.0.60610
+Vendor         : Microsoft Corporation
+Version        : 11.0.60610
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Log Parser 2.2
+Vendor         : Microsoft Corporation
+Version        : 2.2.10
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : VMware Remote Console
+Vendor         : VMware, Inc.
+Version        : 11.0.0
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Citrix App Library Service PowerShell snap-in - x64
+Vendor         : Citrix Systems, Inc.
+Version        : 7.39.25730.23545
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows IP Over USB
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK DirectX x86 Remote
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : VMware Plug-in Service
+Vendor         : VMware, Inc.
+Version        : 6.7.0.163
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows IoT Extension SDK
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK for Windows Store Apps Headers
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : WinRT Intellisense UAP - Other Languages
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Kits Configuration Installer
+Vendor         : Microsoft
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Dell EMC OpenManage Systems Management Software (64-Bit)
+Vendor         : Dell Inc.
+Version        : 9.4.0
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK ARM Desktop Tools
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Universal CRT Redistributable
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK Desktop Headers arm
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : RightFax Product Suite - Client
+Vendor         : Open Text, Inc.
+Version        : 21.2.1.1356
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK for Windows Store Managed Apps Libs
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : WinRT Intellisense UAP - en-us
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Self-service Plug-in
+Vendor         : Citrix Systems, Inc.
+Version        : 22.3.4000.6
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : NBMR 7.2.1 x64
+Vendor         : Cristie Software Ltd.
+Version        : 7.2.1
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Application Verifier x64 External Package (OnecoreUAP)
+Vendor         : Microsoft
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK for Windows Store Apps Contracts
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft SQL Server Data-Tier Application Framework (x86)
+Vendor         : Microsoft Corporation
+Version        : 13.0.3225.4
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Citrix Configuration Service PowerShell snap-in - x64
+Vendor         : Citrix Systems, Inc.
+Version        : 7.39.25730.23545
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft Report Viewer Redistributable 2008 (KB971119)
+Vendor         : Microsoft Corporation
+Version        : 9.0.30731
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows Team Extension SDK
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows Mobile Extension SDK
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Universal CRT Headers Libraries and Sources
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft SQL Server 2012 Native Client 
+Vendor         : Microsoft Corporation
+Version        : 11.3.6518.0
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : CrowdStrike Device Control
+Vendor         : CrowdStrike, Inc.
+Version        : 6.35.14960.0
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : WinRT Intellisense IoT - Other Languages
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK AddOn
+Vendor         : Microsoft Corporation
+Version        : 10.1.0.0
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Citrix Configuration Logging Service PowerShell snap-in - x64
+Vendor         : Citrix Systems, Inc.
+Version        : 7.39.25730.23545
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : 64 Bit HP CIO Components Installer
+Vendor         : HP Inc.
+Version        : 21.2.1
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Application Verifier x64 External Package (DesktopEditions)
+Vendor         : Microsoft
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft .NET Framework 4.8.1 SDK
+Vendor         : Microsoft Corporation
+Version        : 4.8.09032
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Citrix CVAD Remote Powershell SDK - Registry
+Vendor         : Citrix Systems, Inc.
+Version        : 7.39.25730.23545
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : SDK ARM Redistributables
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows Desktop Extension SDK Contracts
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : SSP
+Vendor         : UPS
+Version        : 5.0.8053.19967
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Citrix Storefront Service PowerShell snap-in - x64
+Vendor         : Citrix Systems, Inc.
+Version        : 7.39.25730.23545
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Config Checker
+Vendor         : DELL EMC
+Version        : 19.4.0.1
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft Visual C++ 2022 X64 Minimum Runtime - 14.34.31931
+Vendor         : Microsoft Corporation
+Version        : 14.34.31931
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK for Windows Store Apps DirectX x86 Remote
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Citrix Authentication Manager
+Vendor         : Citrix Systems, Inc.
+Version        : 22.3.4000.30
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK Signing Tools
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft SQL Server 2016 T-SQL Language Service 
+Vendor         : Microsoft Corporation
+Version        : 13.0.14500.10
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows App Certification Kit x64 (OnecoreUAP)
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : VMware Enhanced Authentication Plug-in 6.7.0
+Vendor         : VMware, Inc.
+Version        : 6.7.0.4882
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : WinAppDeploy
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : WinRT Intellisense Mobile - en-us
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Citrix VdaUpdateService Service PowerShell snap-in - x64
+Vendor         : Citrix Systems, Inc.
+Version        : 7.39.25730.23545
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK for Windows Store Apps
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft Windows Desktop Runtime - 3.1.32 (x64)
+Vendor         : Microsoft Corporation
+Version        : 24.192.31915
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Citrix Group Policy Management (x64)
+Vendor         : Citrix Systems, Inc.
+Version        : 1.7.0.0
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Universal CRT Extension SDK
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK Desktop Libs arm64
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : MSI Development Tools
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK Redistributables
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK Desktop Headers x64
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows Team Extension SDK Contracts
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : NetWorker
+Vendor         : DELL EMC
+Version        : 19.4.0.1
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows Mobile Extension SDK Contracts
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Windows SDK Desktop Libs x64
+Vendor         : Microsoft Corporation
+Version        : 10.1.22621.755
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : PHP Manager 1.2 for IIS 7
+Vendor         :  
+Version        : 1.2.0
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+Name           : Microsoft Analysis Services ADOMD.NET
+Vendor         : Microsoft Corporation
+Version        : 14.0.1000.397
+PSComputerName : wpadma01
+RunspaceId     : 0a8b1043-18d5-4b88-82ec-4a9787cd4f08
+
+

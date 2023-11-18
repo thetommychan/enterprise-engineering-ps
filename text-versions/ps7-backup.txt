@@ -1,0 +1,23 @@
+function Get-StoredCredential {
+    param (
+        [string]$Target
+    )
+    $credential = cmdkey /list:$Target | Select-String "Target:"
+    if ($credential) {
+        $credentialLine = $credential -split ':\s+', 2
+        $username = $credentialLine[1]
+        return Get-Credential -UserName $username -Message "Enter password for $username"
+    } else {
+        Write-Host "No stored credentials found for $Target."
+    }
+}
+
+$cred = Get-StoredCredential -Target "myTarget"
+
+[system.net.webrequest]::DefaultWebProxy = new-object system.net.webproxy('http://proxy.ups.com:8080')
+[System.Net.WebRequest]::DefaultWebProxy.Credentials = $cred
+[system.net.webrequest]::DefaultWebProxy.BypassProxyOnLocal = $true
+
+Import-Module -Name "PackageManagement" -RequiredVersion 1.4.8.1
+Import-Module -Name "PowerShellGet" -RequiredVersion 2.2.5
+Write-Host -ForegroundColor Black -BackgroundColor Green "The PowerShell Profile loaded is updated to 'TFF_tc v1.0'"

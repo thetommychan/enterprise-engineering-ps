@@ -1,0 +1,17 @@
+# Copy new files built in dev to ap210/ap211 cubebuild folders
+
+$path = '\\oscms-alm-ap212\D$\cognos_data\cubebuild\'
+$files = Read-Host -Prompt "Enter the filename, no extension"
+
+$ap210 = '\\oscms-alm-ap210\d$\cognos_data\cubebuild\'
+$ap211 = '\\oscms-alm-ap211\d$\cognos_data\cubebuild\'
+$ap212 = '\\oscms-alm-ap212\d$\cognos_data\cubebuild\'
+
+cp $path$files* $ap210 -Force
+cp $path$files* $ap211 -Force
+
+gci $ap210$files*
+
+gci $ap211$files*
+
+gci $ap212$files*

@@ -1,0 +1,87 @@
+# FLS-MAM Unit Standup Automation
+# 1. Right-click the fls-unit-standup powershell script and click 'Run with PowerShell'
+# 2. Read the 3 banner messages at the top of the ps window
+# 3. Type the new value that is being applied to the FLSPlatformId key per the unit standup instructions and hit Enter
+# 4. The script updates and saves the config files
+# 5. type y and hit Enter to view the first 15 lines of each config file to ensure they were updated appropirately
+# 6. UAC Window appears asking for admin priviliges to run the first config step: Click yes and let the first step run
+# 7. After the first step is finished running, a new UAC window will appear asking for admin rights to run the next 
+#    step. This will happen 5 times, allowing initial load steps 1, 2, 3, 4, and 7 to run in order to complete the unit 
+#    standup.
+#    IF A UAC WINDOW IS MISSED, CANCEL THE REST OF THE OPERATION AND START OVER. Values should not need to be re-enetered 
+#    if the integration steps were already started.
+
+# Load each .config file
+[xml]$xmlDoc7 = Get-Content -Path 'P:\MAM\Integration_Console - Initial Load Step 7 CPLs\MAMFLSIntegrationConsole.exe.config'
+$val7 = ($xmlDoc7.configuration.appSettings.add | ?{$_.key -eq "FLSPlatformId"})
+[xml]$xmlDoc4 = Get-Content -Path 'P:\MAM\Integration_Console - Initial Load Step 4 MAINT\MAMFLSIntegrationConsole.exe.config'
+$val4 = ($xmlDoc4.configuration.appSettings.add | ?{$_.key -eq "FLSPlatformId"})
+[xml]$xmlDoc3 = Get-Content -Path 'P:\MAM\Integration_Console - Initial Load Step 3 MAINT OP\MAMFLSIntegrationConsole.exe.config'
+$val3 = ($xmlDoc3.configuration.appSettings.add | ?{$_.key -eq "FLSPlatformId"})
+[xml]$xmlDoc2 = Get-Content -Path 'P:\MAM\Integration_Console - Initial Load Step 2 MILSTRIP\MAMFLSIntegrationConsole.exe.config'
+$val2 = ($xmlDoc2.configuration.appSettings.add | ?{$_.key -eq "FLSPlatformId"})
+[xml]$xmlDoc1 = Get-Content -Path 'P:\MAM\Integration_Console - Initial Load Step 1 CONFIG\MAMFLSIntegrationConsole.exe.config'
+$val1 = ($xmlDoc1.configuration.appSettings.add | ?{$_.key -eq "FLSPlatformId"})
+
+# Displays the last FLSPlatformId value used in the most recent unit standup
+Write-Host -BackgroundColor White -ForegroundColor Black "The last unit standup used the FLSPlatformId value"$val7.Value
+Write-Host -BackgroundColor Yellow -ForegroundColor Black "IF ANY ERRORS ARE ENCOUNTERED WHILE THIS SCRIPT IS BEING RUN, `nSCREENSHOT OR NOTATE TO THE BEST OF YOUR ABILITY AND NOTIFY TOM CHANDLER AND ADAM ANDERSON"
+
+# Prompt to enter the new FLSPlatformId value from the unit standup instructions
+$newVal = Read-Host -Prompt "Enter the new value, or just hit Enter to bypass"
+if ($newVal -gt '0') {
+Write-Host "Updating..."
+
+# Replace the current value of FLSPlatformId with the value entered in  the prompt
+$val7.Value = "$newVal"
+$val4.Value = "$newVal"
+$val3.Value = "$newVal"
+$val2.Value = "$newVal"
+$val1.Value = "$newVal"
+
+# Save the .config files with the new FLSPlatformId values
+Write-Host "Saving..."
+
+$xmlDoc7.Save('P:\MAM\Integration_Console - Initial Load Step 7 CPLs\MAMFLSIntegrationConsole.exe.config')
+$xmlDoc4.Save('P:\MAM\Integration_Console - Initial Load Step 4 MAINT\MAMFLSIntegrationConsole.exe.config')
+$xmlDoc3.Save('P:\MAM\Integration_Console - Initial Load Step 3 MAINT OP\MAMFLSIntegrationConsole.exe.config')
+$xmlDoc2.Save('P:\MAM\Integration_Console - Initial Load Step 2 MILSTRIP\MAMFLSIntegrationConsole.exe.config')
+$xmlDoc1.Save('P:\MAM\Integration_Console - Initial Load Step 1 CONFIG\MAMFLSIntegrationConsole.exe.config')
+
+Write-Host "Done!"
+
+ }
+# Verify the new value was saved to the .config files correctly
+$verify = Read-Host -Prompt "Visually confirm current values?(y/n)"
+if ($verify -eq 'y') {
+    
+    Write-Host -BackgroundColor Yellow -ForegroundColor Black "Initial Load Step 7 CPLs" 
+    Get-Content -Path 'P:\MAM\Integration_Console - Initial Load Step 7 CPLs\MAMFLSIntegrationConsole.exe.config' -TotalCount 15 
+    Write-Host -BackgroundColor Yellow -ForegroundColor Black "Initial Load Step 4 MAINT"
+    Get-Content -Path 'P:\MAM\Integration_Console - Initial Load Step 4 MAINT\MAMFLSIntegrationConsole.exe.config' -TotalCount 15
+    Write-Host -BackgroundColor Yellow -ForegroundColor Black "Initial Load Step 3 MAINT OP"
+    Get-Content -Path 'P:\MAM\Integration_Console - Initial Load Step 3 MAINT OP\MAMFLSIntegrationConsole.exe.config' -TotalCount 15
+    Write-Host -BackgroundColor Yellow -ForegroundColor Black "Initial Load Step 2 MILSTRIP"
+    Get-Content -Path 'P:\MAM\Integration_Console - Initial Load Step 2 MILSTRIP\MAMFLSIntegrationConsole.exe.config' -TotalCount 15
+    Write-Host -BackgroundColor Yellow -ForegroundColor Black "Initial Load Step 1 CONFIG"
+    Get-Content -Path 'P:\MAM\Integration_Console - Initial Load Step 1 CONFIG\MAMFLSIntegrationConsole.exe.config' -TotalCount 15
+
+}
+$unitStandup = Read-Host -Prompt "Press y to continue with running the integration steps, or press Enter to finish now."
+if ($unitStandup -eq 'y') {
+
+# Run the unit standup in order of 1, 2, 3, 4, 7
+
+Start-Process -FilePath 'P:\MAM\Integration_Console - Initial Load Step 1 CONFIG\MAMFLSIntegrationConsole.exe' -Verb RunAs -Wait -ErrorAction Inquire
+Start-Process -FilePath 'P:\MAM\Integration_Console - Initial Load Step 2 MILSTRIP\MAMFLSIntegrationConsole.exe' -Verb RunAs -Wait -ErrorAction Inquire
+Start-Process -FilePath 'P:\MAM\Integration_Console - Initial Load Step 3 MAINT OP\MAMFLSIntegrationConsole.exe' -Verb RunAs -Wait -ErrorAction Inquire
+Start-Process -FilePath 'P:\MAM\Integration_Console - Initial Load Step 4 MAINT\MAMFLSIntegrationConsole.exe' -Verb RunAs -Wait -ErrorAction Inquire
+Start-Process -FilePath 'P:\MAM\Integration_Console - Initial Load Step 7 CPLs\MAMFLSIntegrationConsole.exe' -Verb RunAs -ErrorAction Inquire
+Read-Host -Prompt "MAMFLS Unit Standup is complete. Verify with development that the standup was successful. `nIf the standup was not successful, run again MANUALLY according to unit standup instructions `nand ping Tom on Teams to inform of malfunction. `nPress Enter to exit..."
+} else {
+
+Write-Host -BackgroundColor Yellow -ForegroundColor Black "The unit standup has not been performed.`nIf you encountered an error or something did not work as expected, please notify Adam Anderson and Tom Chandler.
+`n This window will close in approx. 30 seconds."
+Start-Sleep -Seconds 30
+
+}

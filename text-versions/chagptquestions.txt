@@ -1,0 +1,1 @@
+I have a script that runs and checks the available IPs in my environment for VM IP allocation, until we get a proper IPAM solution in place. the script runs, and places all the available IPs in spreadsheet on a shared server. I want to export the existing spreadsheet into PowerShell and 
