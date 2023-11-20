@@ -91,11 +91,5 @@ function Get-Tidal
 
 
 
-$scriptblock = {
-    
-    $t = 'tom'
-    CMD /K set tom = $t
-
-
-}
+$scriptblock = Set-ScheduledTask
 

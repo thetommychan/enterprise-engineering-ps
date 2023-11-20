@@ -358,7 +358,7 @@ function Copy-XMLs
     $session1 = New-PSSession -ComputerName $DestServer
     Copy-Item 'C:\upgf\websites.xml' 'C:\upgf\' -ToSession $session1 | Out-Null;
     Copy-Item 'C:\upgf\apppools.xml' 'C:\upgf\' -ToSession $session1 | Out-Null;
-    Write-Host -ForegroundColor Green "Copied app pool and site xmls"
+    Write-Host -ForegroundColor Green "Copied app pool and site xmls to $DestServer"
 }
 
 # Copy the IIS Site directories from the Source server to the Destination server. Performed as Robocopy jobs from WPADMA01 for efficiency.

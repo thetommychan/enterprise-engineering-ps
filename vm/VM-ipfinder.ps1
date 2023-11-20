@@ -1,6 +1,7 @@
 ﻿# Modules Needed: VMWare PowerCLI
 
-function Get-AvailableIPs {
+function Get-AvailableIPs
+{
     # Specify the path to your XLSX file
     $excelPath = "\\opnasi02\Server\Tom\Scripts\xlsx\vm_ip_export.xlsx"
 
@@ -39,7 +40,8 @@ function Get-AvailableIPs {
 }
 
 # Function to test IP availability
-function Test-IPAvailability {
+function Test-IPAvailability
+{
     param (
         [string]$IPAddress
     )
