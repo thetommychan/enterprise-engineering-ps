@@ -361,6 +361,7 @@ function Copy-XMLs
     param(
         [string]$DestinationServer
     )
+    $share = "\\opnasi02\server\tom\sites"
     $session1 = New-PSSession -ComputerName $DestinationServer
     # Copy-Item 'C:\upgf\websites.xml' 'C:\upgf\' -ToSession $session1 | Out-Null;
     # Copy-Item 'C:\upgf\apppools.xml' 'C:\upgf\' -ToSession $session1 | Out-Null;
