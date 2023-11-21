@@ -3,14 +3,14 @@
     The purposes of this script is to copy and configure an existing IIS 
     site to a new server from an existing server in support of upgrading or 
     migratory efforts. The script collects 3 parameters from the user:
-    1.  The Scope; Import Site/Config to the Destination server, Export 
+    1.  Scope; Import Site/Config to the Destination server, Export 
         Site/Config from the Source Server, Both (export from source and import 
         to destination), or Restart IIS. 
-    2.  The SourceServer; the server from which the IIS site will be migrated.
-    3.  The DestinationServer; the server to which the iis site will be migrated.
+    2.  SourceServer; the server from which the IIS site will be migrated.
+    3.  DestinationServer; the server to which the iis site will be migrated.
 
 .DESCRIPTION
-    Run this script by calling it with at least 2 of the named parameters. Scope is required, and either/both Source/Dest will be inadvertently required next. 
+    Run this script by calling it with at least 2 of the named parameters. Scope is required, and either/both Source/Destination will be inadvertently required next. 
     The intention of this script is to make IIS Site migration simple and quick. With the Export scope, the IIS apppool/site configurations of the target server are exported
     to the local machine as XML files. Next, the XML files are parsed, cleaning up any mistakes that may have been made in export and preparing them for import to their new home.
     Then, the inetpub folder of the target server is copied to a share. If the server has an FTP Site that isn't found in inetpub, this script will miss that directory.
@@ -20,21 +20,27 @@
     to import the XML configurations on the target server's IIS Manager. Then, the IIS Site is restarted and a reminder is posted about the IIS Certificate for any sites using SSL.
 
 .PARAMETER Scope
-    The 
+    The SCOPE parameter accepts 3 inputs: Import, Export, and Migrate. When performing any operation, designate the target server approperiately:
+    If Import, use Destination
+    If Export, use Source
+    If Migrate, use Source and Destination
 
 .PARAMETER SourceServer
-    Description of the second parameter.
+    The SOURCESERVER is the server from which the IIS Site configuration will be copied or moved. All sites, app pools, settings, etc. will be copied.
 
-.PARAMETER DestServer
-    Description of the third parameter.
-
-.EXAMPLE
-    .\iis-app-config -Scope Import -DestServer wppndw21
-    Description of what this example does.
+.PARAMETER DestinationServer
+    The DestinationServer is the server to which the IIS Site configuration will be copied or moved. The Default Site and Default App Pools will remain in tact, and the imported 
 
 .EXAMPLE
-    .\YourScript.ps1 -Parameter1 Value1 -Parameter3 Value3
-    Another example with different parameters.
+    .\iis-app-config -Scope Import -DestinationServer ServerB
+    This will import the saved configuration from the Server Share if it's present. 
+    If it's not present, a message will be displayed: 
+    "No source to import from. Please Run 'iis-app-config.ps1 -Scope Export -SourceServer <Server Name>' to create a valid configuration to import."
+
+.EXAMPLE
+    .\iis-app-config -Scope Migrate -SourceServer ServerA -DestinationServer ServerB
+    This will migrate the IIS Site configuration from ServerA to ServerB. 
+    
 
 .NOTES
     Author: Tom Chandler
@@ -49,8 +55,8 @@ param(
     [string]$Scope,                             # Export site configuration and files from source server and import to new server
     [Parameter(Position=1, HelpMessage="The SourceServer parameter defines the server from which the IIS Site will either be exported or migrated from.")]
     [string]$SourceServer,                      # Source server is the server the configuration is being coped from, ideally identical to the server that's being provisioned
-    [Parameter(Position=2, HelpMessage="The DestServer parameter defines the server to which the IIS Site will either be imported or migrated to.")]
-    [string]$DestServer                         # Destination server is the destination the configuration is being copied to, namely the new server.
+    [Parameter(Position=2, HelpMessage="The DestinationServer parameter defines the server to which the IIS Site will either be imported or migrated to.")]
+    [string]$DestinationServer                  # Destination server is the destination the configuration is being copied to, namely the new server.
 )
 function Export-ServerCert # Not working, not enough patience
 {
@@ -124,10 +130,10 @@ function Set-LocalAdmin
     [CmdletBinding()]
     param(
         [string]$SourceServer,
-        [string]$DestServer
+        [string]$DestinationServer
     )
-    Write-Host -ForegroundColor Yellow "Attempting to add NBCH100 service account to Local Administrators group on $DestServer"
-    Invoke-Command -ComputerName $DestServer -ScriptBlock {Get-LocalGroupMember -Group Administrators -Member NBCH100} -ErrorAction SilentlyContinue
+    Write-Host -ForegroundColor Yellow "Attempting to add NBCH100 service account to Local Administrators group on $DestinationServer"
+    Invoke-Command -ComputerName $DestinationServer -ScriptBlock {Get-LocalGroupMember -Group Administrators -Member NBCH100} -ErrorAction SilentlyContinue
     if (!($?))
     {
         Write-Host -ForegroundColor White "NBCH100 Already a member of Local Administrators"
@@ -135,7 +141,7 @@ function Set-LocalAdmin
     }
     else
     {
-        Invoke-Command -ComputerName $DestServer -ScriptBlock {Add-LocalGroupMember -Group Administrators -Member NBCH100 -Verbose}
+        Invoke-Command -ComputerName $DestinationServer -ScriptBlock {Add-LocalGroupMember -Group Administrators -Member NBCH100 -Verbose}
         Write-Host -ForegroundColor Green "NBCH100 Added to Local Administrators"
     }
 }
@@ -145,10 +151,10 @@ function Set-LocalRemoting
     [CmdletBinding()]
     param(
         [string]$SourceServer,
-        [string]$DestServer
+        [string]$DestinationServer
     )
     Write-Host -ForegroundColor Yellow "Checking to see if $env:USERNAME is capable of Remote Management"
-    Invoke-Command -ComputerName $DestServer -ScriptBlock {Get-LocalGroupMember -Group "Remote Management Users" -Member "$env:UserName"} -ErrorAction SilentlyContinue
+    Invoke-Command -ComputerName $DestinationServer -ScriptBlock {Get-LocalGroupMember -Group "Remote Management Users" -Member "$env:UserName"} -ErrorAction SilentlyContinue
     if (!($?))
     {
         Write-Host -ForegroundColor White "$env:UserName already a member or Remote Management Users"
@@ -156,7 +162,7 @@ function Set-LocalRemoting
     }
     else
     {
-        Invoke-Command -ComputerName $DestServer -ScriptBlock {Add-LocalGroupMember -Group "Remote Management Users" -Member "$env:UserName" -Verbose}
+        Invoke-Command -ComputerName $DestinationServer -ScriptBlock {Add-LocalGroupMember -Group "Remote Management Users" -Member "$env:UserName" -Verbose}
         Write-Host -ForegroundColor Green "NBCH100 Added to Local Administrators"
     }
 }
@@ -209,7 +215,7 @@ function Remove-AppPool
     [CmdletBinding()]
     param(
         [string]$SourceServer,
-        [string]$DestServer,
+        [string]$DestinationServer,
         [string]$AppPoolName
     )
     # Fix-AppPoolXML;
@@ -353,12 +359,41 @@ function Copy-XMLs
 {   
     [CmdletBinding()]
     param(
-        [string]$DestServer
+        [string]$DestinationServer
     )
-    $session1 = New-PSSession -ComputerName $DestServer
-    Copy-Item 'C:\upgf\websites.xml' 'C:\upgf\' -ToSession $session1 | Out-Null;
-    Copy-Item 'C:\upgf\apppools.xml' 'C:\upgf\' -ToSession $session1 | Out-Null;
-    Write-Host -ForegroundColor Green "Copied app pool and site xmls to $DestServer"
+    $session1 = New-PSSession -ComputerName $DestinationServer
+    # Copy-Item 'C:\upgf\websites.xml' 'C:\upgf\' -ToSession $session1 | Out-Null;
+    # Copy-Item 'C:\upgf\apppools.xml' 'C:\upgf\' -ToSession $session1 | Out-Null;
+    Invoke-Command -ComputerName wpadma01 -ScriptBlock {robocopy \\$using:share\$DestinationServer\xmls \\$using:DestinationServer\c$\ *.xml /S /E /Z /B /NFL /NDL /TEE /R:3 /W:3} -ConfigurationName admin
+    Write-Host -ForegroundColor Green "Copied app pool and site xmls to $DestinationServer"
+}
+
+function Export-XMLs
+{
+    [CmdletBinding()]
+    param(
+        [string]$Destination
+    )
+
+    if (Test-Path "$Destination\xmls")
+    {
+        Copy-Item 'C:\upgf\websites.xml' "$Destination\xmls" | Out-Null;
+        Copy-Item 'C:\upgf\apppools.xml' "$Destination\xmls" | Out-Null;
+        Write-Host -ForegroundColor Green "Website and Apppool xmls copied to Share"
+    }
+    elseif (!(Test-Path "$Destination\xmls"))
+    {
+        New-Item -ItemType Directory -Path $Destination -Name "xmls" | Out-Null
+        Copy-Item 'C:\upgf\websites.xml' "$Destination\xmls" | Out-Null;
+        Copy-Item 'C:\upgf\apppools.xml' "$Destination\xmls" | Out-Null;
+        Write-Host -ForegroundColor Green "Website and Apppool xmls copied to Share"
+    }
+    else
+    {
+        Write-Host "Unable to locate $Destination"
+        break
+    }
+    Write-Host -ForegroundColor Green "Copied app pool and site xmls to $SourceServer"
 }
 
 # Copy the IIS Site directories from the Source server to the Destination server. Performed as Robocopy jobs from WPADMA01 for efficiency.
@@ -371,54 +406,83 @@ function Get-PhysicalSiteFiles
         [ValidateSet("Import", "Export", "Migrate")]
         [string]$Scope, 
         [string]$SourceServer,
-        [string]$DestServer
+        [string]$DestinationServer
     )
-    if ((Test-Path "\\$SourceServer\c$\inetpub") -and $Scope -eq "Migrate") # Straight up migrate from one server to another, no switches
+    $share = "\\opnasi02\server\tom\sites"
+    if ($Scope -eq "Migrate") # Straight up migrate from one server to another, no switches
     {
-        if (!(Test-Path \\$DestServer\c$\inetpub))
+        if (!(Test-Path \\$DestinationServer\c$\inetpub))
         {
-            New-Item -ItemType Directory -Path "\\$destServer\c$\" -Name "inetpub" -Force -ErrorAction SilentlyContinue | Out-Null
-            Write-Host -ForegroundColor Green "Inetpub folder created on $DestServer"
-            Invoke-Command -ComputerName wpadma01 -ScriptBlock {robocopy \\$using:SourceServer\c$\inetpub\ \\$using:DestServer\c$\inetpub\ /S /E /Z /B /NFL /NDL /TEE /R:3 /W:3 /MT:16} -ConfigurationName admin
+            New-Item -ItemType Directory -Path "\\$DestinationServer\c$\" -Name "inetpub" -Force -ErrorAction SilentlyContinue | Out-Null
+            Write-Host -ForegroundColor Green "Inetpub folder created on $DestinationServer"
+            Invoke-Command -ComputerName wpadma01 -ScriptBlock {robocopy \\$using:SourceServer\c$\inetpub\ \\$using:DestinationServer\c$\inetpub\ /S /E /Z /B /NFL /NDL /TEE /MT:16} -ConfigurationName admin
         }
         else
         {
-            Invoke-Command -ComputerName wpadma01 -ScriptBlock {robocopy \\$using:SourceServer\c$\inetpub\ \\$using:DestServer\c$\inetpub\ /S /E /Z /B /NFL /NDL /TEE /R:3 /W:3 /MT:16} -ConfigurationName admin
+            Invoke-Command -ComputerName wpadma01 -ScriptBlock {robocopy \\$using:SourceServer\c$\inetpub\ \\$using:DestinationServer\c$\inetpub\ /S /E /Z /B /NFL /NDL /TEE /MT:16} -ConfigurationName admin
         }
     }
-    elseif ((Test-Path "\\$SourceServer\c$\inetpub") -and $Scope -eq "Export") # Exporting Source to Share
+    elseif ($Scope -eq "Export") # Exporting Source to Share
     {
-        if (!(Test-Path "\\opnasi02\server\tom\sites\$SourceServer"))
+        if (Test-Path "$share\$SourceServer")
         {
-            New-Item -ItemType Directory -Path "\\opnasi02\server\tom\sites\" -Name "$sourceServer" -Force -ErrorAction SilentlyContinue | Out-Null
-            if (!(Test-Path "\\opnasi02\server\tom\sites\$SourceServer\inetpub"))
+            if (!(Test-Path "$share\$SourceServer\inetpub"))
             {
-                New-Item -ItemType Directory -Path "\\opnasi02\server\tom\sites\$SourceServer" -Name "inetpub" -Force -ErrorAction SilentlyContinue | Out-Null
-                Invoke-Command -ComputerName wpadma01 -ScriptBlock {robocopy \\$using:SourceServer\c$\inetpub\ \\opnasi02\server\tom\sites\$using:SourceServer\inetpub /S /E /Z /B /NFL /NDL /TEE /R:3 /W:3 /MT:16} -ConfigurationName admin
-            }
-        }
-        elseif ((Test-Path "\\opnasi02\server\tom\sites\$SourceServer\$Source"))
-        {
-            Invoke-Command -ComputerName wpadma01 -ScriptBlock {robocopy \\$using:SourceServer\c$\inetpub\ \\opnasi02\server\tom\sites\$using:SourceServer\inetpub /S /E /Z /B /NFL /NDL /TEE /R:3 /W:3 /MT:16} -ConfigurationName admin
-        }   
-    }
-    elseif ((Test-Path "\\$DestServer\c$\") -and $Scope -eq "Import")
-    {
-        if (!(Test-Path "\\$DestServer\c$\inetpub\") -and $Scope -eq "Import")
-        {
-            New-Item -ItemType Directory -Path "\\$DestServer\c$\" -Name "inetpub" -Force -ErrorAction SilentlyContinue | Out-Null
-            if ((Test-Path \\$DestServer\c$\inetpub))
-            {
-                Invoke-Command -ComputerName wpadma01 -ScriptBlock {robocopy \\opnasi02\server\tom\sites\$using:DestServer\inetpub \\$using:DestServer\c$\inetpub\ /S /E /Z /B /NFL /NDL /TEE /R:3 /W:3 /MT:16} -ConfigurationName admin
+                New-Item -ItemType Directory -Path "$share\$SourceServer" -Name "inetpub" | Out-Null;
+                Export-IISSites -SourceServer $SourceServer;
+                Export-AppPools -SourceServer $SourceServer;
+                Remove-DefaultSite -SourceServer $SourceServer;
+                Fix-AppPoolXML;
+                New-Item -ItemType Directory -Path "$share\$SourceServer\" -Name "xmls" -Force -ErrorAction SilentlyContinue | Out-Null
+                Export-XMLs -Destination "$Share\$SourceServer\"
+                Invoke-Command -ComputerName wpadma01 -ScriptBlock {robocopy \\$using:SourceServer\c$\inetpub\ $using:share\$using:SourceServer\inetpub /S /E /Z /B /NFL /NDL /TEE /MT:16} -ConfigurationName admin
             }
             else
             {
-                Write-Host -ForegroundColor Red "Unable to reach $Source folder on $DestServer"
+                Export-IISSites -SourceServer $SourceServer;
+                Export-AppPools -SourceServer $SourceServer;
+                Remove-DefaultSite -SourceServer $SourceServer;
+                Fix-AppPoolXML;
+                New-Item -ItemType Directory -Path "$share\$SourceServer\" -Name "xmls" -Force -ErrorAction SilentlyContinue | Out-Null
+                Export-XMLs -Destination "$Share\$SourceServer\"
+                Invoke-Command -ComputerName wpadma01 -ScriptBlock {robocopy \\$using:SourceServer\c$\inetpub\ $using:share\$using:SourceServer\inetpub /S /E /Z /B /NFL /NDL /TEE /MT:16} -ConfigurationName admin
+            }
+        }
+        elseif (!(Test-Path "$share\$SourceServer\"))
+        {
+            New-Item -ItemType Directory -Path "$share\" -Name "$sourceServer" -Force -ErrorAction SilentlyContinue | Out-Null
+            Write-Host -ForegroundColor Cyan "$SourceServer folder created on Share"
+            if (!(Test-Path "$share\$SourceServer\inetpub"))
+            {
+                New-Item -ItemType Directory -Path "$share\$SourceServer\" -Name "inetpub" | Out-Null;
+                Export-IISSites -SourceServer $SourceServer;
+                Export-AppPools -SourceServer $SourceServer;
+                Remove-DefaultSite -SourceServer $SourceServer;
+                Fix-AppPoolXML;
+                New-Item -ItemType Directory -Path "$share\$SourceServer\" -Name "xmls" -Force -ErrorAction SilentlyContinue | Out-Null
+                Export-XMLs -Destination "$Share\$SourceServer\"
+                Invoke-Command -ComputerName wpadma01 -ScriptBlock {robocopy \\$using:SourceServer\c$\inetpub\ $using:share\$using:SourceServer\inetpub /S /E /Z /B /NFL /NDL /TEE /MT:16} -ConfigurationName admin
+            }
+        }   
+    }
+    elseif ($Scope -eq "Import") # Importing Source to Desination
+    {
+        if (!(Test-Path "\\$DestinationServer\c$\inetpub\"))
+        {
+            New-Item -ItemType Directory -Path "\\$DestinationServer\c$\" -Name "inetpub" -Force -ErrorAction SilentlyContinue | Out-Null
+            if ((Test-Path \\$DestinationServer\c$\inetpub))
+            {
+                Invoke-Command -ComputerName wpadma01 -ScriptBlock {robocopy $share\$using:DestinationServer\inetpub \\$using:DestinationServer\c$\inetpub\ /S /E /Z /B /NFL /NDL /TEE /MT:16} -ConfigurationName admin
+            }
+            else
+            {
+                Write-Host -ForegroundColor Red "Unable to reach $Source folder on $DestinationServer"
             }
         }
         else
         {
-            Write-Host -ForegroundColor Yellow "inetpub already present on $DestServer"
+            Write-Host -ForegroundColor Yellow "inetpub already present on $DestinationServer"
+            Invoke-Command -ComputerName wpadma01 -ScriptBlock {robocopy $share\$using:DestinationServer\inetpub \\$using:DestinationServer\c$\inetpub\ /S /E /Z /B /NFL /NDL /TEE /MT:16} -ConfigurationName admin
         }
     }
     else
@@ -428,14 +492,14 @@ function Get-PhysicalSiteFiles
 }
 
 # Import the App Pool XMLs to the Destination Server
-function Import-Sites
+function Import-XMLs
 {
     [CmdletBinding()]
     param(
-        [string]$DestServer
+        [string]$DestinationServer
     )
-    Start-Process -FilePath PsExec -ArgumentList "-s", "\\$DestServer", "cmd", "/c", "C:\Windows\System32\inetsrv\appcmd.exe add apppool /in < C:\upgf\apppools.xml"
-    Start-Process -FilePath PsExec -ArgumentList "-s", "\\$DestServer", "cmd", "/c", "C:\Windows\System32\inetsrv\appcmd.exe add site /in < c:\upgf\websites.xml"
+    Start-Process -FilePath PsExec -ArgumentList "-s", "\\$DestinationServer", "cmd", "/c", "C:\Windows\System32\inetsrv\appcmd.exe add apppool /in < C:\upgf\apppools.xml"
+    Start-Process -FilePath PsExec -ArgumentList "-s", "\\$DestinationServer", "cmd", "/c", "C:\Windows\System32\inetsrv\appcmd.exe add site /in < c:\upgf\websites.xml"
 }
 
 # Stop IIS Service on Destination
@@ -444,11 +508,11 @@ function Stop-IIS
     [CmdletBinding()]
     param(
         [string]$SourceServer,
-        [string]$DestServer
+        [string]$DestinationServer
     )
-    if ($destServer)
+    if ($DestinationServer)
     {
-        Start-Process -FilePath PsExec -ArgumentList "-s", "\\$DestServer", "cmd", "/c", "iisreset /stop"
+        Start-Process -FilePath PsExec -ArgumentList "-s", "\\$DestinationServer", "cmd", "/c", "iisreset /stop"
     }
     elseif ($sourceServer)
     {
@@ -461,11 +525,11 @@ function Start-IIS
 {
     [CmdletBinding()]
     param(
-        [string]$DestServer
+        [string]$DestinationServer
     )
-    if ($destServer)
+    if ($DestinationServer)
     {
-        Start-Process -FilePath PsExec -ArgumentList "-s", "\\$DestServer", "cmd", "/c", "iisreset /start"
+        Start-Process -FilePath PsExec -ArgumentList "-s", "\\$DestinationServer", "cmd", "/c", "iisreset /start"
     }
     elseif ($sourceServer)
     {
@@ -473,7 +537,7 @@ function Start-IIS
     }
 }
 
-# Function to just export the IIS files to the local machine from the Source Server.
+# Function to just move the XMLs to the new server and import them into IIS.
 function Get-WebServer
 {
     param(
@@ -481,47 +545,41 @@ function Get-WebServer
         [ValidateSet("Import", "Export", "Migrate")]
         [string]$Scope,
         [string]$SourceServer,
-        [string]$DestServer
-    )   
-    Export-IISSites -SourceServer $SourceServer;
-    Export-AppPools -SourceServer $SourceServer;
+        [string]$DestinationServer
+    )
     if($Scope -eq "Export")
     {
-        Move-SiteFiles -Scope Export -SourceServer $SourceServer;
+        Get-DeliveryMethod -SourceServer $SourceServer -ErrorAction SilentlyContinue
+        # Move-SiteFiles -Scope Export -SourceServer $SourceServer;
+        Get-PhysicalSiteFiles -Scope Export -SourceServer $SourceServer;
     }
-    elseif($Scope -eq "Migrate")
+    elseif ($Scope -eq "Import")
     {
-        Move-SiteFiles -Scope Migrate -SourceServer $SourceServer -DestServer $DestServer
-    }
-    Remove-DefaultSite -SourceServer $SourceServer;
-    Fix-AppPoolXML;
-    Import-Sites -DestServer $DestServer;
-    Write-Host -ForegroundColor Black -BackgroundColor Green "Import Success. Verify configuration on new server."
-}
-
-# Function to just move the XMLs to the new server and import them into IIS.
-function Set-WebServer
-{
-    param(
-        [Parameter(Position = 0, Mandatory = $true)]
-        [ValidateSet("Import", "Export", "Migrate")]
-        [string]$Scope,
-        [string]$SourceServer,
-        [string]$DestServer
-    )
-    Copy-XMLs -DestServer $DestServer;
-    if ($Scope -eq "Import")
-    {
-        Set-LocalAdmin -DestServer $DestServer;
-        Move-SiteFiles -Scope Import -DestServer $DestServer;
-        Import-Sites -DestServer $DestServer;
+        $prompt = Read-Host -Prompt "Are you sure the local xmls are correct? (y/n)"
+        if ($prompt -eq 'y' -or '')
+        {
+            Get-DeliveryMethod -DestinationServer $DestinationServer -ErrorAction SilentlyContinue
+            Copy-XMLs -DestinationServer $DestinationServer
+            Import-XMLs -DestinationServer $DestinationServer;
+            Write-Host -ForegroundColor Yellow "Importing Site Files"
+            Get-PhysicalSiteFiles -Scope Import -DestinationServer $DestinationServer;
+            Set-LocalAdmin -DestinationServer $DestinationServer;
+            Write-Host -ForegroundColor Green "Import Success. Verify configuration on new server."
+        }
+        elseif ($prompt -eq 'n')
+        {
+            Write-Host -ForegroundColor Yellow "Verify the local site configs before importing"
+            break
+        }
     }
     elseif ($scope -eq "Migrate")
     {
-        Set-LocalAdmin -DestServer $DestServer;
-        Import-Sites -DestServer $DestServer;
+        Get-DeliveryMethod -DestinationServer $DestinationServer -ErrorAction SilentlyContinue
+        Set-LocalAdmin -DestinationServer $DestinationServer;
+        Import-XMLs -DestinationServer $DestinationServer;
+        Write-Host -ForegroundColor Yellow "Migrating Site Files"
+        Get-PhysicalSiteFiles -Scope Migrate -SourceServer $SourceServer -DestinationServer $DestinationServer;
     }
-    Write-Host -ForegroundColor Black -BackgroundColor Green "Import Success. Verify configuration on new server."
 }
 
 # Determine whether or not the server being modified is virtual or physical
@@ -530,65 +588,38 @@ function Get-DeliveryMethod
     [CmdletBinding()]
     param(
         [string]$SourceServer,
-        [string]$DestServer
+        [string]$DestinationServer
     )
     # Check if VMware Tools is installed
     $vmCheck = Invoke-Command -ComputerName $SourceServer -ScriptBlock {Get-ItemProperty -Path 'HKLM:\SOFTWARE\VMware, Inc.\VMware Tools' -ErrorAction SilentlyContinue} -erroraction silentlycontinue
-    $vmCheck2 = Invoke-Command -ComputerName $DestServer -ScriptBlock {Get-ItemProperty -Path 'HKLM:\SOFTWARE\VMware, Inc.\VMware Tools' -ErrorAction SilentlyContinue} -erroraction silentlycontinue
+    $vmCheck2 = Invoke-Command -ComputerName $DestinationServer -ScriptBlock {Get-ItemProperty -Path 'HKLM:\SOFTWARE\VMware, Inc.\VMware Tools' -ErrorAction SilentlyContinue} -erroraction silentlycontinue
 
-    if ($null -ne $vmCheck -and $SourceServer)
-    {
-        Write-Host -ForegroundColor Cyan "$SourceServer is Virtual"
-        $true
+    if ($SourceServer)
+    {   
+        if ($null -ne $vmCheck)
+        {
+            Write-Host -ForegroundColor Cyan "$SourceServer is Virtual"
+            $true | Out-Null
+        }
+        else
+        {
+            Write-Host -ForegroundColor Cyan "$SourceServer is not Virtual"
+            $false | Out-Null
+        }
     }
-    else
+    elseif ($DestinationServer)
     {
-        Write-Host -ForegroundColor Cyan "$SourceServer is not Virtual"
-        $false
+        if ($null -ne $vmCheck2)
+        {
+            Write-Host -ForegroundColor Cyan "$SourceServer is Virtual"
+            $true | Out-Null
+        }
+        else
+        {
+            Write-Host -ForegroundColor Cyan "$SourceServer is not Virtual"
+            $false | Out-Null
+        }
     }
-    if ($null -ne $vmCheck2 -and $DestServer)
-    {
-        Write-Host -ForegroundColor Cyan "$DestServer is Virtual"
-        $true
-    }
-    else
-    {
-        Write-Host -ForegroundColor Cyan "$DestServer is not Virtual"
-        $false
-    }
-}
-
-function Move-SiteFiles
-{
-    [CmdletBinding()]
-    param(
-        [Parameter(Position = 0, Mandatory = $true)]
-        [ValidateSet("Import", "Export", "Migrate")]
-        [string]$Scope,
-        [string]$SourceServer,
-        [string]$DestServer
-    )
-    if ($Scope -eq "Export")
-    {
-        Get-DeliveryMethod -SourceServer $SourceServer -ErrorAction SilentlyContinue
-        Write-Host -ForegroundColor Yellow "Exporting Site Files"
-        Get-PhysicalSiteFiles -Scope Export -SourceServer $SourceServer;
-    }
-    elseif ($Scope -eq "Migrate")
-    {
-        Get-DeliveryMethod -SourceServer $SourceServer -DestServer $DestServer -ErrorAction SilentlyContinue
-        Write-Host -ForegroundColor Yellow "Migrating Site Files"
-        Get-PhysicalSiteFiles -Scope Migrate -SourceServer $SourceServer -DestServer $DestServer;
-
-    }
-    elseif ($Scope -eq "Import")
-    {
-        Get-DeliveryMethod -DestServer $DestServer -ErrorAction SilentlyContinue
-        Write-Host -ForegroundColor Yellow "Importing Site Files"
-        Get-PhysicalSiteFiles -Scope Import -DestServer $DestServer;
-    }
-
-
 }
 
 # Choosing which function to perform
@@ -599,15 +630,14 @@ if ($Scope -eq "Export")
 }
     elseif ($Scope -eq "Import")
 {
-    Set-WebServer -Scope Import -DestServer $DestServer;
+    Get-WebServer -Scope Import -DestinationServer $DestinationServer;
     Write-Host -ForegroundColor Yellow "DON`'T FORGET TO COPY THE CERT!"
 }
     elseif ($Scope -eq "Migrate")
 {
-    Stop-IIS -DestServer $DestServer;
-    Get-WebServer -Scope Migrate -SourceServer $SourceServer -DestServer $DestServer;
-    Set-WebServer -Scope Migrate -DestServer $DestServer;
-    Start-IIS -DestServer $DestServer;
+    Stop-IIS -DestinationServer $DestinationServer;
+    Get-WebServer -Scope Migrate -SourceServer $SourceServer -DestinationServer $DestinationServer;
+    Start-IIS -DestinationServer $DestinationServer;
     Write-Host -ForegroundColor Yellow "DON`'T FORGET TO COPY THE CERT!"
 }
     elseif ($Scope -eq "Restart")
