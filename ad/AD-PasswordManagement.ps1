@@ -184,7 +184,7 @@ function Reset-ADPassword
     $newPassword = [System.Web.Security.Membership]::GeneratePassword(12, 3)
     $securePassword = ConvertTo-SecureString -String $newPassword -AsPlainText -Force
     Set-ADAccountPassword -Identity $Username -NewPassword $securePassword -Reset -Verbose
-    Write-Host -ForegroundColor Black -BackgroundColor Green "The new password for $accountName is: $newPassword"
+    Write-Host -ForegroundColor Green "The new password for $accountName is: $newPassword"
 }
 
 # View password expiration date

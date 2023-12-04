@@ -1,6 +1,7 @@
 # push files to file server
 
-function push {
+function push
+{
     param(
         [Parameter(Mandatory)]
         [string[]]$File,
@@ -8,7 +9,7 @@ function push {
         [switch]$Overwrite
         )
 # Variables
-$source = 'C:\vscode\psscripts'
+$source = 'C:\vscode\'
 $fileServer = '\\opnasi02\server\tom\scripts'
 
     if ($Overwrite){
@@ -16,5 +17,4 @@ $fileServer = '\\opnasi02\server\tom\scripts'
     } else {
         Copy-Item -Path $source\$File $fileServer\$Destination
     }
-
 }
