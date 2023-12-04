@@ -24,8 +24,8 @@ function PasswordCheck
     }
 }
 
-# Change UPS Password
-function Change-ADPasswordUPS
+# Change Company Password; for use only if working company is a part of a larger company, used to change larger company password as indicated by specifying DC
+function Change-ADPasswordCompany
 {
 param
 (
@@ -34,12 +34,12 @@ param
 )
     # Variables
     $credential = Get-Credential
-    $expireDateUPS = Invoke-Command -ComputerName wpadma01 -ScriptBlock {Get-ADUser -Identity $using:Username -Credential $using:credential -Server usdc01 -Properties "DisplayName", "msDS-UserPasswordExpiryTimeComputed" | Select-Object -Property "Displayname",@{Name="ExpiryDate";Expression={[datetime]::FromFileTime($_."msDS-UserPasswordExpiryTimeComputed")}}}
-    $expirationUPS = $expireDateUPS | Select-Object -Property ExpiryDate -ExpandProperty ExpiryDate
+    $expireDateComp = Invoke-Command -ComputerName wpadma01 -ScriptBlock {Get-ADUser -Identity $using:Username -Credential $using:credential -Server <DomainController> -Properties "DisplayName", "msDS-UserPasswordExpiryTimeComputed" | Select-Object -Property "Displayname",@{Name="ExpiryDate";Expression={[datetime]::FromFileTime($_."msDS-UserPasswordExpiryTimeComputed")}}}
+    $expirationComp = $expireDateComp | Select-Object -Property ExpiryDate -ExpandProperty ExpiryDate
 
     # Warnings
-    Write-Host -ForegroundColor Black -BackgroundColor Red "WARNING: You are attempting to change the UPS Active Driectory Password for $username. `nPlease ensure this user is aware of the change and the intended account is correct."
-    $change = read-host -Prompt "This User's UPS Password expires on $expirationUPS. Would you like to change it now? y/n"
+    Write-Host -ForegroundColor Black -BackgroundColor Red "WARNING: You are attempting to change the Company Active Driectory Password for $username. `nPlease ensure this user is aware of the change and the intended account is correct."
+    $change = read-host -Prompt "This User's (company) Password expires on $expirationComp. Would you like to change it now? y/n"
 
     # exit startegy...
     if ($Username -eq "exit")
@@ -50,7 +50,7 @@ param
     }
     if ($change -eq 'n')
     {
-    Write-Host -ForegroundColor Black -BackgroundColor White "UPS Password was not changed and expires on $expirationUPS.";
+    Write-Host -ForegroundColor Black -BackgroundColor White "Company Password was not changed and expires on $expirationComp.";
     start-sleep -seconds 2;
     Show-MainMenu
     }
@@ -63,10 +63,10 @@ param
             $NewPassword2 = read-host -Prompt "Enter the new password. Copy and paste to avoid errors." -AsSecureString
             try
             {
-                Invoke-Command -ComputerName wpadma01 -ScriptBlock {Set-ADAccountPassword -Identity $using:Username -Credential $using:credential -Server usdc01 -OldPassword $using:OldPassword -NewPassword $using:newPassword2 -ErrorAction SilentlyContinue}
+                Invoke-Command -ComputerName wpadma01 -ScriptBlock {Set-ADAccountPassword -Identity $using:Username -Credential $using:credential -Server <DomainController> -OldPassword $using:OldPassword -NewPassword $using:newPassword2 -ErrorAction SilentlyContinue}
                 if (!($?))
                 {
-                    Write-Host -ForegroundColor Black -BackgroundColor Green "Password changed successfully and expires on $expirationUPS." 
+                    Write-Host -ForegroundColor Black -BackgroundColor Green "Password changed successfully and expires on $expirationComp." 
                     start-sleep -seconds 2;
                     Show-MainMenu
                 }
@@ -74,7 +74,7 @@ param
             catch 
             {
                 Write-Host "An error occurred: $($_.Exception.Message)"
-                Write-Host -ForegroundColor Black -BackgroundColor Red "Password was not changed and expires on $expirationUPS. Returning to Main Menu..."
+                Write-Host -ForegroundColor Black -BackgroundColor Red "Password was not changed and expires on $expirationComp. Returning to Main Menu..."
                 Show-MainMenu
             }
         } 
@@ -87,7 +87,7 @@ param
                 $goAgain = Read-Host -Prompt "Would you like to update another Active Directory password?"
                 if ($goAgain -eq 'y' -or '')
                 {
-                    Change-ADPasswordUPS
+                    Change-ADPasswordCompany
                 }
             }
             elseif ($askIf -eq 'n')
@@ -125,7 +125,7 @@ param
     }
     if ($change -eq 'n')
     {
-    Write-Host -ForegroundColor Black -BackgroundColor White "TFF Password was not changed and expires on $expirationElse."
+    Write-Host -ForegroundColor Black -BackgroundColor White "AD Password was not changed and expires on $expirationElse."
     Show-MainMenu
     }
     elseif ($change -eq 'y' -or '')
@@ -188,7 +188,7 @@ function Reset-ADPassword
 }
 
 # View password expiration date
-function View-ADPasswordExpirationUPS 
+function View-ADPasswordExpirationComp 
 {
 param 
 (
@@ -203,8 +203,8 @@ if ($Username -eq "q")
     }
     # Variables
     $credential = Get-Credential
-    $expireDateUPS = Invoke-Command -ComputerName wpadma01 -ScriptBlock {Get-ADUser -Identity $using:Username -Credential $using:credential -Server usdc01 -Properties "DisplayName", "msDS-UserPasswordExpiryTimeComputed" | Select-Object -Property "Displayname",@{Name="ExpiryDate";Expression={[datetime]::FromFileTime($_."msDS-UserPasswordExpiryTimeComputed")}}}
-    $expirationUPS = $expireDateUPS | Select-Object -Property ExpiryDate -ExpandProperty ExpiryDate
+    $expireDateComp = Invoke-Command -ComputerName wpadma01 -ScriptBlock {Get-ADUser -Identity $using:Username -Credential $using:credential -Server <DomainController> -Properties "DisplayName", "msDS-UserPasswordExpiryTimeComputed" | Select-Object -Property "Displayname",@{Name="ExpiryDate";Expression={[datetime]::FromFileTime($_."msDS-UserPasswordExpiryTimeComputed")}}}
+    $expirationComp = $expireDateComp | Select-Object -Property ExpiryDate -ExpandProperty ExpiryDate
     $user = Get-ADUser -Identity $Username -Properties "PasswordLastSet", "PasswordNeverExpires", "Enabled"
     
     if ($user.Enabled -eq $false) 
@@ -221,7 +221,7 @@ if ($Username -eq "q")
     } 
     else 
     { 
-        Write-Host -ForegroundColor Black -BackgroundColor White "Password for user $Username expires on: $expirationUPS"
+        Write-Host -ForegroundColor Black -BackgroundColor White "Password for user $Username expires on: $expirationComp"
         Write-Host -ForegroundColor Black -BackgroundColor White "Returning to menu..."
         Show-MainMenu
     }
@@ -276,9 +276,9 @@ function Show-MainMenu
 $homeMenuOptions = @"
 Home Menu:
 $masterPrompt
-1. Change UPS Password
+1. Change Company Password
 2. Change Active Directory Password
-3. View UPS Account Password Expiration
+3. View Company Account Password Expiration
 4. View AD Account Password Expiration
 5. Exit
 "@
@@ -288,7 +288,7 @@ $choice = Read-Host "Enter the number of the function you need to perform"
 switch ($choice) {
     "1" {
         # Code for Option 1
-        Change-ADPasswordUPS
+        Change-ADPasswordCompany
     }
     "2" {
         # Code for Option 2
@@ -296,10 +296,10 @@ switch ($choice) {
     }
     "3" {
         # Code for Option 3
-        View-ADPasswordExpirationUPS
+        View-ADPasswordexpirationComp
     }
     "4" {
-        # Exit
+        #  Code for Option 4
         View-ADPasswordExpiration
     }
     "5" {
