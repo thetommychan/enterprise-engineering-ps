@@ -1,6 +1,7 @@
 # SID for user whose login history is being queried
 $checkuser = '*nfed018*'
 
+######## WIP #########
 # Get information about the user logon history for the last 'n' days
 $startDate = (get-date).AddDays(-2)
 $DCs = Get-ADDomainController -Filter *
