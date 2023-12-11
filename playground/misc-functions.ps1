@@ -189,3 +189,148 @@ function Sort-Websites
         }
     }  
 }
+
+function Get-Server
+{
+    # Prompt user for server name
+    $serverName = Read-Host "Enter the server name"
+
+    if ($serverName -ne '')
+    {
+        $servercheck = Get-ADComputer -Filter { Name -eq $serverName } -ErrorAction SilentlyContinue
+
+        if ($null -ne $servercheck)
+        {
+            Write-Host -ForegroundColor Green "Valid Server Name"
+        }
+        else
+        {
+            Write-Host -ForegroundColor Yellow "Invalid Server Name."
+            Get-Server
+        }
+    }
+    else
+    {
+        Write-Host -ForegroundColor Yellow "Please enter the name of a server"
+        Get-Server
+    }
+} Get-Server
+
+function Get-ServiceVerification
+{
+    param(
+        [string]$ServerName,
+        [string]$ServiceNamePattern
+    )
+
+    if ($ServiceNamePattern -ne '')
+    {
+        $services = Get-Service -ComputerName $ServerName | Where-Object { $_.DisplayName -like "$ServiceNamePattern" }
+
+        if ($services)
+        {
+            Write-Host -ForegroundColor Green "Valid Service Name Pattern"
+
+            # Display services with numbers
+            $serviceList = @{}
+            for ($i = 0; $i -lt $services.Count; $i++)
+            {
+                $serviceList["$($i + 1)"] = $services[$i]
+                Write-Host "$($i + 1). $($services[$i].DisplayName)"
+            }
+
+            # Set global variable for selected services
+            $global:SelectedServices = $serviceList
+
+            $services | Format-Table -Property DisplayName, ServiceName, Status
+        }
+        else
+        {
+            Write-Host -ForegroundColor Yellow "No services matching the service name pattern `"$ServiceNamePattern`" found on $ServerName"
+            break
+        }
+    }
+    else
+    {
+        Write-Host -ForegroundColor Yellow "Please enter the pattern of a service name"
+        Get-ServiceVerification -ServerName $ServerName
+    }
+}
+
+function Restart-Services
+{
+    param(
+        [string]$ServerName,
+        [string]$ServiceNamePattern
+    )
+
+    # Check if there are multiple services to restart
+    if ($global:SelectedServices.Count -gt 1)
+    {
+        # Prompt user to restart services by number
+        $selectedServiceNumbers = Read-Host -Prompt "Enter the numbers of the services you want to restart (comma-separated)"
+        $selectedServiceNumbers = $selectedServiceNumbers -split ',' | ForEach-Object { $_.Trim() }
+
+        # Restart selected services
+        $selectedServiceNumbers | ForEach-Object {
+            $number = $_
+            if ($global:SelectedServices.ContainsKey($number))
+            {
+                $selectedServiceName = $global:SelectedServices[$number]
+                Write-Host "Restarting $($selectedServiceName) on $ServerName..."
+                Invoke-Command -ComputerName $ServerName -ScriptBlock {
+                    Restart-Service $using:selectedServiceName -Verbose
+                }
+            }
+            else
+            {
+                Write-Host -ForegroundColor Yellow "Invalid service number: $number"
+            }
+        }
+    }
+    elseif ($global:SelectedServices.Count -eq 1)
+    {
+        # Restart the single selected service directly
+        $selectedServiceName = $global:SelectedServices.Values[0]
+        $confirm = Read-Host -Prompt "Restart $($selectedServiceName) on $ServerName`?"
+        if ($confirm -eq 'y' -or $confirm -eq '')
+        {
+            Invoke-Command -ComputerName $ServerName -ScriptBlock {
+                Restart-Service $using:selectedServiceName -Verbose
+            }
+        }
+        elseif ($confirm -eq 'n')
+        {
+            Write-Host "Not restarting any services."
+        }
+    }
+    else
+    {
+        Write-Host -ForegroundColor Yellow "No services selected for restart."
+    }
+
+    $Date = Get-Date -Format "HH:mmtt | dd/MM/yyyy"
+    # Output to log on opnasi02
+    $logContent = @"
+$Date: Restarted services on '$serverName':
+$($global:SelectedServices.Values -join "`n")
+"@
+    $logPath = "\\opnasi02\Server\Tom\Scripts\logs\ServicesRestartLog.txt"
+    $logContent | Out-File -Append -FilePath $logPath
+}
+
+
+# Example usage:
+$ServerName = Read-Host -Prompt "Enter the server name"
+$ServiceNamePattern = Read-Host -Prompt "Enter the service name pattern (e.g., bg* or PND_DIAD6*)"
+
+# Validate the server name against AD
+Get-Server -ServerName $ServerName
+
+# Validate the service name pattern against the services on the given server
+Get-ServiceVerification -ServerName $ServerName -ServiceNamePattern $ServiceNamePattern
+
+# Restart the given services on the named server
+Restart-Services -ServerName $ServerName
+
+
